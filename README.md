@@ -3,5 +3,5 @@ My solutions for CodeFights tasks on Java.
 
 Codefights username: radek_g
 
-# Arcade
+## Arcade
 * Intro 100%
