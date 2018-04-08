@@ -1,5 +1,5 @@
 # CodeFights
-My solutions for CodeFights tasks on Java.
+My solutions for [CodeFights](https://codefights.com/) tasks on Java.
 
 Codefights username: radek_g
 
