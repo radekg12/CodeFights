@@ -12,6 +12,13 @@ public class Arcade_Intro {
         return param1 + param2;
     }
 
+    int add2(int... args) {
+        int sum = 0;
+        for (int arg : args)
+            sum += arg;
+        return sum;
+    }
+
     int centuryFromYear(int year) {
         return (year - 1) / 100 + 1;
     }
@@ -54,17 +61,16 @@ public class Arcade_Intro {
                     return false;
             }
         }
-        if (counter > 1) return false;
-        else return true;
+        return counter <= 1;
     }
 
     int matrixElementsSum(int[][] matrix) {
         //ArrayList<Integer> list = new ArrayList<>();
         int sum = 0;
         for (int i = 0; i < matrix[0].length; i++)
-            for (int j = 0; j < matrix.length; j++) {
-                if (matrix[j][i] == 0) break;
-                sum += matrix[j][i];
+            for (int[] aMatrix : matrix) {
+                if (aMatrix[i] == 0) break;
+                sum += aMatrix[i];
             }
         return sum;
     }
@@ -107,8 +113,7 @@ public class Arcade_Intro {
             sum1 += Character.getNumericValue(s.charAt(i));
         for (int i = s.length() / 2; i < s.length(); i++)
             sum2 += Character.getNumericValue(s.charAt(i));
-        if (sum1 == sum2) return true;
-        else return false;
+        return sum1 == sum2;
     }
 
     int[] sortByHeight(int[] a) {
@@ -213,8 +218,11 @@ public class Arcade_Intro {
 
     boolean palindromeRearranging(String inputString) {
 
-        //Map<Character,List<Character>> distinctLetters = inputString.chars().mapToObj(c -> (char) c).collect(Collectors.groupingBy(c->c));
-        //return distinctLetters.values().stream().filter(b->b.size()==1).count() <= 1;
+//        Map<Character,List<Character>> distinctLetters = inputString.chars().mapToObj(c -> (char) c).collect(Collectors.groupingBy(c->c));
+//        return distinctLetters.values()
+//                .stream()
+//                .filter(b->b.size()==1)
+//                .count() <= 1;
 
 
         Map<Character, Integer> mapa = new HashMap<>();
@@ -306,15 +314,19 @@ public class Arcade_Intro {
     }
 
     int[] arrayReplace(int[] inputArray, int elemToReplace, int substitutionElem) {
-        //return Arrays.stream(inputArray).map(i->i==elemToReplace? substitutionElem : i).toArray();
+//        return Arrays.stream(inputArray)
+//                .map(i->i==elemToReplace? substitutionElem : i)
+//                .toArray();
+
         for (int i = 0; i < inputArray.length; i++)
             if (inputArray[i] == elemToReplace) inputArray[i] = substitutionElem;
         return inputArray;
     }
 
     boolean evenDigitsOnly(int n) {
-        // return Stream.of(String.valueOf(n).split("")).
-        //         allMatch(s -> Integer.parseInt(s) % 2 == 0);
+//        return Stream.of(String.valueOf(n)
+//                .split(""))
+//                .allMatch(s -> Integer.parseInt(s) % 2 == 0);
 
         for (char s : String.valueOf(n).toCharArray())
             if (s % 2 != 0) return false;
@@ -365,7 +377,10 @@ public class Arcade_Intro {
 
     int absoluteValuesSumMinimization(int[] a) {
         int sum = 0;
-        int min = Arrays.stream(a).map(x -> Math.abs(x)).sum() + 1;
+        int min = Arrays.stream(a)
+                .map(Math::abs)
+                .sum() + 1;
+
         int x = a[0];
         for (int i : a) {
             for (int j : a) {
@@ -573,9 +588,18 @@ public class Arcade_Intro {
     }
 
     int electionsWinners(int[] votes, int k) {
-        int max = Arrays.stream(votes).max().getAsInt();
-        if (k == 0) return (int) Arrays.stream(votes).filter(i -> i == max).count() == 1 ? 1 : 0;
-        return (int) Arrays.stream(votes).filter(i -> i + k > max).count();
+        int max = Arrays.stream(votes)
+                .max()
+                .getAsInt();
+
+        if (k == 0)
+            return (int) Arrays.stream(votes)
+                    .filter(i -> i == max)
+                    .count() == 1 ? 1 : 0;
+
+        return (int) Arrays.stream(votes)
+                .filter(i -> i + k > max)
+                .count();
     }
 
     boolean isMAC48Address(String inputString) {
@@ -666,7 +690,7 @@ public class Arcade_Intro {
 
         for (int i = 0; i < matrix.length - 1; i++) {
             for (int j = 0; j < matrix[0].length - 1; j++) {
-                String s = new String();
+                String s = "";
                 s += matrix[i][j] + "." + matrix[i][j + 1] + "." + matrix[i + 1][j] + "." + matrix[i + 1][j + 1];
                 set.add(s);
             }
@@ -677,7 +701,7 @@ public class Arcade_Intro {
     int digitsProduct(int product) {
         List<Integer> list = new ArrayList<>();
         String st = "";
-        boolean f = false;
+        boolean f;
         if (product == 0) return 10;
         while (("" + product).length() > 1) {
             f = false;
